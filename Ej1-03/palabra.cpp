@@ -19,9 +19,15 @@ void resuelveCaso() {
     cin >> n;
     vector<string> v(n);
     for (auto& i : v)cin >> i;
-    sort(v.begin(), v.end());
+    //sort(v.begin(), v.end());
+    string pivote=v[0];
+    for(int i=1;i<v.size();i++){
+        if(pivote==v[i]){}
+        else if(pivote>v[i])
+            pivote=v[i];
+    }
     // escribir sol
-    cout << v[0] << endl;
+    cout << pivote << endl;
     
 
 
