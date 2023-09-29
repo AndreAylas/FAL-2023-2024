@@ -15,6 +15,14 @@ using namespace std;
 
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
+/*
+N=numero de vueltas
+v=supuesto vector
+Q={forall w:0<w<N:v[w]!=0}
+func contar(int v[],int N) dev r;
+P={maximo=max u:0<=u<N:v[u] and r=#i:0<=i<N:v[i]=maximo }
+*/
+
 void resuelveCaso() {
     // leer los datos de la entrada
     //string line;
@@ -27,6 +35,7 @@ void resuelveCaso() {
     int maximo = num;
     int contar = 1;
     cin>>num;
+    //coste O(N)
     while (num!=0) {
         if (maximo >= num) {
             if (maximo == num) {
