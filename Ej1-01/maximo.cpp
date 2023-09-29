@@ -18,9 +18,9 @@ using namespace std;
 /*
 N=numero de vueltas
 v=supuesto vector
-Q={forall w:0<w<N:v[w]!=0}
+P={forall w:0<w<N:v[w]!=0}
 func contar(int v[],int N) dev r;
-P={maximo=max u:0<=u<N:v[u] and r=#i:0<=i<N:v[i]=maximo }
+Q={maximo=max u:0<=u<N:v[u] and r=#i:0<=i<N:v[i]=maximo }
 */
 
 void resuelveCaso() {
