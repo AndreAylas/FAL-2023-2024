@@ -14,37 +14,38 @@ using namespace std;
 n=numero de elementos a analizar
 r=datos erroneos;
 P={existe i:0<=i<n:v[i]=r and (-2^63<r and r<2^63)}
-func resolver(inout: v[],inout: n,int r) dev sol[]
+func resolver(inout: v[],inout: n,int r)
 
-Q={contar=(#i:0<=i<n:v[i]!=r)}
+resolver(v,r)={ idx=0 && (datos[idx]=(forall i:0<=i<n && v[i]!=r:v[i])&& idx=(forall i:0<=i<n && v[i]!=r:idx+1)}
 */
 
+//funcion que resuelve el problema
+
+void resolver(vector<int> &v,int r){
+    vector<int> aux;
+    int n=v.size();
+    int idx=0;
+    for(int i=0;i<n;i++){
+        if(v[i]!=r){
+            v[idx]=v[i];
+            idx++;
+        }
+    }
+    v.resize(idx);
+}
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 void resuelveCaso() {
     // leer los datos de la entrada
     int error;int n;
     cin>>n>>error;
-    vector<int> sol;
+    vector<int> sol(n);
+    for(auto&i:sol)cin>>i;
+    resolver(sol,error);
     // escribir sol
-    int num;
-    int r=-1;
-    for(int i=0;i<n;i++){
-        cin>>num;
-        if(num!=error){
-            sol.push_back(num);
-            r=0;
-        }
-    }
-    if(r==-1){
-        cout<<"0\n";
-        cout<<"\n";
-    }
-    else{
-        cout<<sol.size()<<"\n";
-        for(auto&i:sol)cout<<i<<" ";
-        cout<<"\n";
-    }
+    cout<<sol.size()<<"\n";
+    for(auto&i:sol)cout<<i<<" ";
+    cout<<"\n";
 }
 
 int main() {
