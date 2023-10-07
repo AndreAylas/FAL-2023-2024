@@ -6,46 +6,57 @@
 #include <iomanip>
 #include <fstream>
 #include<vector>
+
 using namespace std;
 
+struct tSol{
+    int ini;
+    int fin;
+    int gananciaMax;
+   // bool esBeneficioso;
+};
+
 // función que resuelve el problema
-
-/*
-n=numero de elementos a analizar
-r=datos erroneos;
-P={existe i:0<=i<n:v[i]=r and (-2^63<r and r<2^63)}
-func resolver(inout: v[],inout: n,int r)
-
-resolver(v,r)={ (idx=(#i:0<=i<n && v[i]!=r:i && v[idx]=v[i])) && (forall b:0<=b<idx:(existe a:0<=a<n:v[a]!=r):v[b]=v[a])}
-*/
-
-//funcion que resuelve el problema
-
-void resolver(vector<int> &v,int r){
-    vector<int> aux;
-    int n=v.size();
-    int idx=0;
-    for(int i=0;i<n;i++){
-        if(v[i]!=r){
-            v[idx]=v[i];
-            idx++;
+tSol resolver(const vector<int>&v,int s) {
+    tSol sol={0,0,0};
+    int acum=0,i=0,idx,fin;
+    idx=fin=i;
+    for(;i<v.size();i++){
+        acum+=v[i];
+        if(acum>=0){
+            fin=i;
+            if(acum>=s && sol.gananciaMax<acum){
+                sol={idx,fin,acum};
+            }
+        }
+        else{
+            if((acum-v[i])>=s && sol.gananciaMax<(acum-v[i])){
+                sol={idx,fin,acum-v[i]};
+            }
+            acum=0;
+            idx=i+1;
         }
     }
-    v.resize(idx);
+    return sol;
 }
+
 // Resuelve un caso de prueba, leyendo de la entrada la
 // configuración, y escribiendo la respuesta
 void resuelveCaso() {
     // leer los datos de la entrada
-    int error;int n;
-    cin>>n>>error;
-    vector<int> sol(n);
-    for(auto&i:sol)cin>>i;
-    resolver(sol,error);
+    int N,S;
+    cin>>N>>S;
+    vector<int>ruleta(N);
+    for(auto&i:ruleta)cin>>i;
+    
+    tSol sol = resolver(ruleta,S);
     // escribir sol
-    cout<<sol.size()<<"\n";
-    for(auto&i:sol)cout<<i<<" ";
-    cout<<"\n";
+    if(sol.gananciaMax==0){
+        cout<<"NO COMPENSA\n";
+    }else{
+        cout<<sol.gananciaMax<<" "<<sol.ini<<" "<<sol.fin<<"\n";
+    }
+    
 }
 
 int main() {
