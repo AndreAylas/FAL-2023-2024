@@ -9,9 +9,18 @@
 using namespace std;
 
 // función que resuelve el problema
+/*
+n=v.size()
+P={l>=1 && forallw:0<n<=20000:v[i]>=0 and forall j: 0<=j<l:v[j]!=0 and v[j]!=1}
+func resolver(v,l) dev cant:int
+cerosunos(v,p,q)={(#s:p<=s<q:v[s]=0)=(#s:p<=s<q:v[s]=1)}
+Q={cantidad=#i,j:0<=i<j<n and j-i=l:cerosunos(v,i,j)}
+
+*/
 int resolver(const vector<int>&v,int l) {
     int cant=0;
     int ceros=0,unos=0;
+
     for(int i=0;i<l;i++){
         if(v[i]==0){
             ceros++;
@@ -22,6 +31,8 @@ int resolver(const vector<int>&v,int l) {
     }
     if(ceros==unos)cant++;
 
+    //invarianteI={#p: 0<=p<n-l and b-a=l:cerosunos(v,p,p+l)}
+    //cota n-i
     for(int j=l;j<v.size();j++){
         if(v[j]==0){
             ceros++;

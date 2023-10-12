@@ -15,12 +15,29 @@ struct tSol{
     int gananciaMax;
    // bool esBeneficioso;
 };
+/*
+N=lista de la entrada
+S=beneficio esperado
 
+P={0<=N<=10^8 and 0<=S and forall i:0<=i<N:v[i]!=vacio}
+
+funcion resolver(v[],N,S) dev {ini:int,fin:int,ganaciaMax:int}
+
+suma(v,i,j)=sum k:i<=k<j:v[k]
+
+Q={ganancia>=0 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)>=S:suma(v,i,j+1) 
+                                    &&
+    ganancia=-1 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)<>=>S:suma(v,i,j+1) 
+}
+
+
+*/
 // función que resuelve el problema
 tSol resolver(const vector<int>&v,int s) {
     tSol sol={0,0,0};
     int acum=0,i=0,idx,fin;
     idx=fin=i;
+    //cota:N-fin
     for(;i<v.size();i++){
         acum+=v[i];
         if(acum>=0){

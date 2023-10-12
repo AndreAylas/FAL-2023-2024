@@ -9,6 +9,18 @@
 using namespace std;
 using lli=long long int;
 // función que resuelve el problema
+/*
+
+P={0<n<=v.size() && forall i:0<=i<n:v[i]!=vacio}
+
+func minimal(const in v[],int n) dev bool r
+
+minimalista(v,a,b)={#i,j:a<=i<j<b:min(v[i],v[j])<2)}
+
+Q={(#a,b:0<=a<b<=n:minimo(v,a,b))}
+
+*/
+
 bool resolver(const vector<lli>&v) {
     bool b=true;
     int i=1;
