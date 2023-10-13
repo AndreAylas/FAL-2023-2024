@@ -20,7 +20,7 @@ func resolver(v[],acum[],int n) dev b:bool
 
 P={b=(existe u:0<=u<n-1:v[u]=(sum j: u+1<=j<=n-1:v[j]))}
 
-
+coste O(n) donde n: es la longitud de secuencia de valores contables
 
 
 */
