@@ -18,14 +18,16 @@ P={n>=1 && exit i:0<=i<n:v[i]>t};
 func resolver(v[],n,t)dev {out ini,out fin}
 
 Q={ intervalo(v[],n,t,ini,fin) &&ladoIzq(v[],n,t,ini,fin)}
-intervalo(v[],n,t,ini,fin)={(0<=ini<fin<n) && (forall:ini<=i<=fin:v[i]>t)}
+intervalo(v[],n,t,ini,fin)=((0<=ini<=fin<n) && (forall:ini<=i<=fin:v[i]>t))
 ladoIzq(v[],n,t,ini,fin)={forall i,j:0<=i<=j<n:&&intervalo(v,n,t,i,j):(fin-ini>j-i)|| (fin-ini)=j-i->ini<i)}
-    
+el coste es de O(n) donde n es el numero de altura,esto es porque se recorre una vez el vector donde se busca
+el mayor intervalo donde los elementos del vector supere a t   
 */
 // función que resuelve el problema
 tSol resolver(const vector<int>& v, int t) {
     tSol s={0,0};
     int segmento = 0,segMax=0;
+    //I=(intervalo(v[],n,t,ini,fin) &&ladoIzq(v[],n,t,ini,fin))
     for (int i = 0; i<v.size(); i++) {
         if (v[i] > t) {
             segmento++;

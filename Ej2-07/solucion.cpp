@@ -10,6 +10,19 @@
 using namespace std;
 const int MAX=10001;
 // función que resuelve el problema
+/*
+n=numero de tiro de dados
+valor=puntaje maximo de las tiradas
+tam=numero de caras
+m=tamaño de la solucion
+P=(6<=tam<10000 && 0<n<=200000 && forall i:0<=i<n:v[i]>0 && v[i]<valor)
+
+func (v[],int n ,int valor) dev sol[]
+forall i:0<=i<10001:frecuencia[i]=0
+Q=( forall j:0<=j<n:frecuencia[v[i]]=frecuencia[v[i]]+1 && maxfrecuencia=forall 0<=i<n:max(maxfrecuencia:frecuencia[i])
+                                            &&
+    forall l:0<=l<m:sol[l]=(forall k:0<=k<n && frecuencia[k]=maxfrecuencia:k))
+*/
 vector<int> resolver(const vector<int>&dados,int valor) {
     vector<int> frecuencia(MAX,0);
     int maxfrecuencia=0;

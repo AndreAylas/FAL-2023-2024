@@ -9,6 +9,18 @@
 using namespace std;
 using lli=long long int;
 // función que resuelve el problema
+/*
+l1=tamaño de la lista 1
+l2=tamaño de la lista 2
+n=tamaño de la solucion
+P=(0<=l1,l2<100000 && forall i: 0<=i<l1:v1[i]>0 && forall j:0<=j<l2:v2[j]>0)
+
+func resolver(v1[],v2[],int l1,int l2)dev sol[]
+
+Q=(ordendo(sol,n) && forall w:0<=w<n:pertenece(v1,sol,l1,w)||pertenece(v2,sol,l2,w))
+ordenado(sol,n)=(forall i:0<=i<n-1:v[i]<v[i+1])
+pertenece(v,sol,l,w)=(existe i:0<=i<l:v[i]=sol[w])
+*/
 vector<int> resolver(const vector<int>&v1, const vector<int>&v2) {
     vector<int> sol;
 
