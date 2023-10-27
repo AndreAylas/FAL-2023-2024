@@ -1,42 +1,42 @@
 // Nombre del alumno .....
 // Usuario del Juez ......
-
+/*
+oscar andre aylas Henrnadez F04
+Carlos Mayorga Santiago F58
+*/
 
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include<vector>
 using namespace std;
-using lli=long long int;
-// función que resuelve el problema
+
 /*
+n=tamaño de la muestra
 
-P=(0<n<=v.size() && forall i:0<=i<n:v[i]!=vacio)
+P=( 0<n<100.000 && forall u:0<=u<n:-1000<v[u] && v[u]<1000)
 
-func minimal(const in v[],int n) dev bool r
+func resolver(v[],acum[],int n) dev b:bool
 
+Q=(b=(existe u:0<=u<n-1:v[u]=(sum j: u+1<=j<=n-1:v[j])))
 
+coste O(n) donde n: es la longitud de secuencia de valores contables
 
-Q=(minimo=v[0] && contar=# u:0<u<n:v[u]=minimo && contar<2)
 
 */
 
-bool resolver(const vector<lli>&v) {
-    bool b=true;
-    int i=1;
-    int minimo=v[0];
-    //I=(minimo=v[0] && contar=# u:0<u<n:v[u]=minimo && contar<2)
-    while(b && i<v.size()){
-        if(minimo<v[i]){
+// función que resuelve el problema
+bool resolver(const vector<int>& v, int &suma) {
+    int i=0,n=v.size();
+    bool b=false;
+
+    //cota=n-i 
+    //Invariante={b=(existe a:-1<a<n && v[a]=(sum b:a<b<n:v[b]))}
+    while(!b && i<n){
+        suma=suma-v[i];
+        if(v[i]==suma)
             b=true;
-        }
-        else if(minimo>v[i]){
-            minimo=v[i];
-            b=true;
-        }
-        else{
-            b=false;
-        }
+        
         i++;
     }
     return b;
@@ -46,22 +46,23 @@ bool resolver(const vector<lli>&v) {
 // configuración, y escribiendo la respuesta
 bool resuelveCaso() {
     // leer los datos de la entrada
-    lli n;
+    int n,suma=0;
     cin>>n;
-    if (n==-1)
+    if (n==0)
         return false;
-    vector<lli>v(n);
-    for(auto&i:v)cin>>i;
-    bool sol = resolver(v);
-    
+    vector<int> v(n);
+    for(auto&i:v){
+        cin>>i;
+        suma+=i;
+    }
+    vector<int> aux(n);
+
     // escribir sol
-    if(sol){
-        cout<<"SI";
-    }
-    else{
-        cout<<"NO";
-    }
-    cout<<"\n";
+    bool resul=resolver(v,suma);
+    if(resul)
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
     return true;
     
 }
@@ -70,7 +71,7 @@ int main() {
     // Para la entrada por fichero.
     // Comentar para acepta el reto
     #ifndef DOMJUDGE
-     std::ifstream in("casos.in");
+     std::ifstream in("datos.txt");
      auto cinbuf = std::cin.rdbuf(in.rdbuf()); //save old buf and redirect std::cin to casos.txt
      #endif 
     

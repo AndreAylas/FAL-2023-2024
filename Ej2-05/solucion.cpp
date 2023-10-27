@@ -12,11 +12,13 @@ using namespace std;
 /*
 ini=año de inicio
 fin=año de fin
-P={1700<=ini<fin<=100000 and forall i:0<=i<N and N=fin-ini+1: -2^31+1<=v[i] and v[i]<2^31+1}
-
-func resolver(v,ini) dev v[]:vector<int>
-
-Q=
+N=fin-ini+1
+P=(1700<=ini<fin<=100000 and forall i:0<=i<N: -2^31+1<=v[i] and v[i]<2^31+1)
+func resolver(v,ini) dev sol[]:vector<int>
+maximo(a,b)=
+Q=(tamaño= # i: 0<=i<N && v[i]=(existe j:i<j<N:v[i]<[j]:v[j])
+                         && 
+forall w: 0<=w<tamaño:v[w]=forall i:0<=i<N && v[i]=(existe j:i<j<N:v[i]<[j]:v[j]):i+ini)
 
 */
 

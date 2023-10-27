@@ -19,16 +19,16 @@ struct tSol{
 N=lista de la entrada
 S=beneficio esperado
 
-P={0<=N<=10^8 and 0<=S and forall i:0<=i<N:v[i]!=vacio}
+P=(0<=N<=10^8 and 0<=S and forall i:0<=i<N:v[i]!=vacio)
 
 funcion resolver(v[],N,S) dev {ini:int,fin:int,ganaciaMax:int}
 
 suma(v,i,j)=sum k:i<=k<j:v[k]
 
-Q={ganancia>=0 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)>=S:suma(v,i,j+1) 
+Q=(ganancia>=0 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)>=S:suma(v,i,j+1) 
                                     &&
-    ganancia=-1 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)<>=>S:suma(v,i,j+1) 
-}
+    ganancia=-1 <=> ganancia=max i,j:0<=i<=j<N and suma(v,i,j+1)<>=>S:suma(v,i,j+1) )
+
 
 
 */
