@@ -8,30 +8,31 @@
 using namespace std;
 using lli = long long int;
 
+struct tnum{
+    lli valor;
+    bool tieneuno;
+};
 
 // función que resuelve el problema
-lli sinunos(lli num, bool& b) {
-    if (num <10) {
-        b = num % 10 == 1;
-        return num == 0 ? 1 : num;
+tnum sinunos(lli n) {
+    if (n <10) {
+        if (n == 0) return {1, false};
+        else {
+            if (n == 1) return { n, true };
+            else return { n, false };
+        }
     }
     else {
-        lli n = num / 10;
-        lli resto = num % 10;
-        lli r = sinunos(n,b);
-        if (b||r==0||r==1) {
-            if (n >= 20 && !b) {
-                r = r * 9 - 8;
-            }
-            else {
-                r = r * 9;
-            }
-        }
+        tnum s = sinunos(n / 10);
+        s.valor = s.valor * 9;
+        if (s.tieneuno) return s;
         else {
-            r =r*9-(9-resto);
+            if (n % 10 > 1) s.valor -= 9 - n % 10;
+            else s.valor -= 8;
+            if (n % 10 == 1) s.tieneuno = true;
+            return s;
         }
-        b = b || resto == 1;
-        return r;
+     
     }
 
 }
@@ -45,7 +46,7 @@ bool resuelveCaso() {
     if (!std::cin)
         return false;
     bool b = false;
-    cout << sinunos(num,b) << "\n";
+    cout << sinunos(num).valor << "\n";
 
     // escribir sol
 
