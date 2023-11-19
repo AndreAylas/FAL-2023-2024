@@ -10,18 +10,22 @@
 using namespace std;
 
 // función que resuelve el problema
-char resolver(const vector<char>& v, int ini, int fin) {
-    if (ini == fin) {
-        return v[ini] + 1;
+char resolver(const vector<char>& v, int ini, int fin,char preso_ini,char preso_fin) {
+
+    if (ini + 1 == fin) {
+        if (v[ini] == preso_ini) {
+            return preso_fin;
+        }
+        else
+            return preso_ini;
     }
-    else if (ini+1 == fin)
-        return v[ini] +1;
     else {
         int m = (ini + fin) / 2;
-        if (v[m] + (fin - m) == v[fin])
-            return resolver(v, ini , m-1);
+        char medio = (preso_ini + preso_fin) / 2;
+        if (v[m]>medio)
+            return resolver(v, ini, m,preso_ini,medio);
         else
-            return resolver(v, m+1, fin);
+            return resolver(v, m, fin, medio, preso_fin);
     }
 
 }
@@ -33,9 +37,10 @@ void resuelveCaso() {
     char ini, fin;
     cin >> ini >> fin;
     int longitud = fin - ini;
+    //creando el vector
     vector<char> prisionero(longitud);
     for (auto& i : prisionero)cin >> i;
-    char sol = resolver(prisionero, 0, prisionero.size() - 1);
+    char sol = resolver(prisionero, 0, prisionero.size(),ini,fin);
 
     cout << sol << "\n";
     // escribir sol
