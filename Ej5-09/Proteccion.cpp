@@ -28,13 +28,15 @@ void imprimirSol(const vector<int>& sol) {
 // función que resuelve el problema
 void solucion(vector<int>const&L,vector<int>const&G,vector<int>const&S,vector<int>const& P,int&Minsueldo,int&sueldoparcial,int r,int k,vector<int>&sol,int&restante,const int minimo,vector<int>&personas,int ciudades) {
     for (int i = 0;i < L.size();i++) {//probamos a asignar la patrulla a una ciudad
-        sol[k] = i;
-        sueldoparcial += P[k] * S[i];
-        restante -= P[k];
+        sol[k] = i;//asignando a la solucion la ciudad
+      //marcaje
+        sueldoparcial += P[k] * S[i];//calculo sueldo parcial
+        restante -= P[k];//al acumulado le resto personal que se asigno
         if (esCompatible(k, i, G, P, personas)) {
-            if (personas[i] < L[i] && (personas[i] + P[k] >= L[i])) {
+            if (personas[i] < L[i] && (personas[i] + P[k] >= L[i])) {//verifico que la ciudad ya tiene a su personal junto a su patrullas
                 ciudades++;
             }
+              //marcaje
             personas[i] += P[k];
             if (k == P.size() - 1) {
                 if (ciudades == L.size()) {
@@ -57,10 +59,10 @@ void solucion(vector<int>const&L,vector<int>const&G,vector<int>const&S,vector<in
         restante += P[k];
        
     }
-//probando a no asignar la patrulla
+    //probando a no asignar la patrulla
     sol[k] = -1;
     //marcamos
-    sueldoparcial += P[k] * r;
+    sueldoparcial += P[k] * r;//al no asignar perosnal a la patrulla se tiene que pagar r
     restante -= P[k];
     if (k == P.size() - 1) {
         if (ciudades == L.size()) {
@@ -84,25 +86,27 @@ void solucion(vector<int>const&L,vector<int>const&G,vector<int>const&S,vector<in
 void resuelveCaso() {
     // leer los datos de la entrada
     int m, n, r;
-    cin >> n >> m >> r;
-    vector<int> L(n);
-    vector<int>G(n);
-    vector<int> S(n);
+    cin >> n >> m >> r;//n numero de ciudad m numero de patrullas y r sueldo para reservas
+    vector<int> L(n);//minimo numero de personas
+    vector<int>G(n);//mayor numero de personas G>L
+    vector<int> S(n);//sueldo x numero de persona
 
     for (auto& i : L)cin >> i;
     for (auto& j : G)cin >> j;
     for (auto& k : S)cin >> k;
-    vector<int>P(m);
+    vector<int>P(m);//personas disponibles donde m es numero de patrullas
     for (auto& l : P)cin >> l;
-    int Minsueldo = INT_MAX;
+    int Minsueldo = INT_MAX;//sueldo total 
     int k = 0,sueldoParcial=0;
     int restantes = 0;//numero de personas
+    //calculo de total de personas
     for (auto& i : P) {
         restantes += i;
     }
-    int minimo = r;
+
+    int minimo = r;//sueldo minimo
     for (auto& j : S) {
-        minimo = min(minimo, j);
+        minimo = min(minimo, j);//calculo del sueldo minimo del total del vector sueldo
     }
     vector<int>sol(m);
     vector<int>personas(n,0);
